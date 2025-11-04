@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organizations</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<style>
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background: #f6f8fc;
+}
+
+
+.page-wrapper {
+    display: flex;
+}
+
+
+.sidebar {
+    width: 250px;
+    background: #1f2d3d;
+    color: #fff;
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+}
+
+.nav-logo{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 0 0;
+    /* margin-top: 0; */
+}
+.nav-logo h1{
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+.nav-logo h2{
+   font-size: 28px;
+    font-weight: 600;
+    color: white;
+}
+.box{
+    /* height: 20px; */
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    color: #2f486b;
+    /* color: #000; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+.sidebar .logo {
+    font-size: 20px;
+    font-weight: bold;
+    /* margin-bottom: 50px; */
+}
+
+.sidebar ul li {
+    margin: 16px -25px;
+    list-style: none;
+    cursor: pointer;
+    padding: 8px;
+    padding-left: 10px;
+    border-radius: 6px;
+    width: 95%;
+}
+.sidebar ul li.active,
+.sidebar ul li:hover {
+    background: #324a5f;
+}
+
+
+.org-section { 
+    flex: 1; 
+    padding: 40px 60px; 
+    margin-left: 270px; 
+}
+
+.section-title { 
+    font-size: 28px; 
+    margin-bottom: 20px; 
+    text-align: center; 
+    color: #16305d; 
+}
+
+
+.org-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+}
+
+
+.org-card {
+    background: white;
+    width: 300px;
+    padding: 25px;
+    border-radius: 14px;
+    border: 1px solid #e3e6ef;
+    transition: 0.3s;
+}
+.org-card:hover {
+    /* transform: translateY(-6px); */
+    box-shadow: 0px 12px 24px rgba(0,0,0,0.15);
+    border: 0.5px solid #16305d;
+}
+
+
+.org-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.org-logo {
+    width: 50px;
+    /* height: 55px; */
+    border-radius: 1rem;
+    object-fit: cover;
+}
+
+.org-info h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+.description {
+    margin: 10px 0 18px;
+    font-size: 14px;
+    color: #4b5563;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+.footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    background: #16305d;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+    width: 90%;
+    /* font-weight: 500; */
+}
+
+.follow-btn{
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 15px;
+}
+
+.footer:hover {
+    background: #F9C846;
+    color: #16305d;
+}
+.footer:hover .follow-btn {
+    color: #16305d;
+}
+.footer:hover svg {
+    fill: #16305d;
+}
+.sidebar ul:last-of-type {
+    margin-top: auto; 
+}
+</style>
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+   
+    <aside class="sidebar">
+
+        <div class="nav-logo" style="color: white;">
+                <h1 class="box">E</h1>
+                <h2>ventUs</h2>
+        </div>
+
+        <ul>
+            <li onclick="window.location.href='/foryou'">For You</li>
+            <li class="active">Explore Organizations</li>
+            <!-- <li>Subscriptions</li> -->
+            <!-- <li>Explore Categories</li> -->
+            <!-- <li>Hackathons</li> -->
+            <!-- <li>Networking Events</li> -->
+            <!-- <li>Groups</li> -->
+            <li onclick="window.location.href='/bookmarks'">Bookmarks</li>
+            <li onclick="window.location.href='/set_preferences'">Set preferences</li>
+            
+        </ul>
+        <ul>
+            <li onclick="window.location.href='/user/logout'">Logout</li>
+        </ul>
+    </aside>
+
+    
+    <section class="org-section">
+        <h2 class="section-title">Discover Organizations</h2>
+        <br>
+        <div class="org-grid">
+
+            <div class="org-card">
+                <div class="org-header">
+                    <img src="\images\Logo[1].png" class="org-logo">
+                    <div class="org-info">
+                        <h3>Zenith Coding Club</h3>
+                    </div>
+                </div>
+                <p class="description">
+                    Community of tech enthusiasts conducting workshops, projects, and hackathons to grow practical programming skills.
+                </p>
+                <div style="display: flex; align-items: center; gap: 4px;">
+                    <i class="bi bi-geo-alt"></i>
+                    <p class="location">NIT Bhopal</p>
+                </div>
+                <div class="footer">
+                    <button class="follow-btn">Follow</button>
+                    <i class="bi bi-person-add"></i>
+                </div>
+            </div>
+
+            <div class="org-card">
+                <div class="org-header">
+                    <img src="\images\Logo[1].png" class="org-logo">
+                    <div class="org-info">
+                        <h3>IEEE Student Chapter</h3>
+                    </div>
+                </div>
+                <p class="description">
+                    Platform promoting research, collaboration, innovation and professional development among students.
+                </p>
+                <div style="display: flex; align-items: center; gap: 4px;">
+                    <i class="bi bi-geo-alt"></i>
+                <p class="location">NIT Bhopal</p>
+                </div>
+                <div class="footer">
+                    <button class="follow-btn">Follow</button>
+                    <i class="bi bi-person-add"></i>
+                </div>
+            </div>
+
+            <div class="org-card">
+                <div class="org-header">
+                    <img src="\images\Logo[1].png" class="org-logo">
+                    <div class="org-info">
+                        <h3>Google Developers Group</h3>
+                    </div>
+                </div>
+                <p class="description">
+                    Organizes meetups and workshops focusing on Google Cloud, AI, Web & Mobile app development.
+                </p>
+                <div style="display: flex; align-items: center; gap: 4px;">
+                    <i class="bi bi-geo-alt"></i>
+                    <p class="location">NIT Bhopal</p>
+                </div>
+                <div class="footer">
+                    <button class="follow-btn">Follow</button>
+                    <i class="bi bi-person-add"></i>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+<script>
+    document.querySelectorAll('.follow-btn').forEach((el, index, arr) => {
+    el.addEventListener('click', function() {
+
+        this.textContent = 'Following'
+        
+    });
+});
+</script>
+</body>
+</html>

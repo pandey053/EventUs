@@ -5,8 +5,21 @@ function toVector(words) {
   const vec = new Array(vocab.length).fill(0);
 
   words.forEach(w => {
-    const index = vocab.indexOf(w.toLowerCase());
-    if (index !== -1) vec[index] = 1;
+    const normalized = w.toLowerCase().trim();
+    
+    // Exact match
+    let index = vocab.indexOf(normalized);
+    if (index !== -1) {
+      vec[index] = 1;
+      return;
+    }
+    
+    // Partial match - check if any vocab word contains the input or vice versa
+    vocab.forEach((vocabWord, i) => {
+      if (vocabWord.includes(normalized) || normalized.includes(vocabWord)) {
+        vec[i] = 0.7; // Lower weight for partial matches
+      }
+    });
   });
 
   return vec;

@@ -210,3 +210,32 @@ select, .clear-btn {
   gap: 20px;
   width: 100%;
 }
+
+.skillbox{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.skills{
+    padding: 10px 10px;
+    border: 0.5px solid rgba(103, 99, 99, 0.542);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.selected{
+    border: 0.5px solid #2A81E0;
+    background-color: #88a7c961;
+
+}
+button{
+    margin-top: 15px;
+    border: none;
+    outline: none;
+    padding: 10px 25px;
+    cursor: pointer;
+    background-color: rgb(219, 91, 91);
+    color: white;
+    border-radius: 5px;
+}

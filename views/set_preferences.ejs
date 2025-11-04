@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +22,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
+
 <body>
+    <input 
+  type="hidden" 
+  id="savedPreferences" 
+  value='<%- JSON.stringify(interests || []) %>'>
+
+
 
     <div class="layout">
 
@@ -54,164 +62,138 @@
             </header>
 
             <section class="page-title">
-                <h2>Choose your preferences based on your skill and interests.</h2>
-                <p>Skills</p>
+                <h2>Choose your preferences based on your interests.</h2>
+                <p style="margin-top: 20px;">Categories</p>
+                    <div class="skillbox" style="margin-top: 15px;">
+                  
+    <span class="skills">Artificial Intelligence</span>
+    <span class="skills">Machine Learning</span>
+    <span class="skills">Web Development</span>
+    <span class="skills">Mobile Development</span>
+    <span class="skills">Data Science</span>
+    <span class="skills">Cybersecurity</span>
+    <span class="skills">Blockchain</span>
+    <span class="skills">Cloud Computing</span>
+    <span class="skills">DevOps</span>
+    <span class="skills">UI/UX Design</span>
+    <span class="skills">Product Management</span>
+    <span class="skills">Digital Marketing</span>
+    <span class="skills">Entrepreneurship</span>
+    <span class="skills">Startups</span>
+    <span class="skills">Business Strategy</span>
+    <span class="skills">Finance</span>
+    <span class="skills">Sustainability</span>
+    <span class="skills">Healthcare Tech</span>
+    <span class="skills">EdTech</span>
+    <span class="skills">Gaming</span>
+    <span class="skills">AR/VR</span>
+    <span class="skills">IoT</span>
+    <span class="skills">Robotics</span>
+    <span class="skills">Photography</span>
+    <span class="skills">Writing</span>
+    <!-- Skills -->
+    <span class="skills">JavaScript</span>
+    <span class="skills">Python</span>
+    <span class="skills">Java</span>
+    <span class="skills">React</span>
+    <span class="skills">Node.js</span>
+    <span class="skills">SQL</span>
+    <span class="skills">MongoDB</span>
+    <span class="skills">AWS</span>
+    <span class="skills">Docker</span>
+    <span class="skills">Git</span>
+    <span class="skills">Figma</span>
+    <span class="skills">Photoshop</span>
+    <span class="skills">Excel</span>
+    <span class="skills">PowerPoint</span>
+    <span class="skills">Public Speaking</span>
+    <span class="skills">Leadership</span>
+    <span class="skills">Project Management</span>
+    <span class="skills">Research</span>
+    <span class="skills">Data Analysis</span>
+    <span class="skills">Content Writing</span>
+    <span class="skills">Social Media</span>
+    <span class="skills">SEO</span>
+
+                            </div>
+
+            <button onclick="savePreferences()">Update</button>
             </section>
 
-            <div class="filters">
-                <select id="categoryFilter">
-                    <option>All Categories</option>
-                    <option>Workshop</option>
-                    <option>Hackathon</option>
-                    <option>Seminar</option>
-                </select>
 
-                <select id="modeFilter">
-                    <option>All Modes</option>
-                    <option>online</option>
-                    <option>offline</option>
-                    <option>hybrid</option>
-                </select>
+            <section class="page-title">
+                <h2>Choose your Institute</h2>
+                <p style="margin-top: 20px;">Categories</p>
+                    <div class="skillbox" style="margin-top: 15px;">
+                  
 
-                <button class="clear-btn" onclick="clearFilters()">Clear Filters</button>
-            </div>
 
+                            </div>
+            </section>
+
+            
             
         </main>
 
     </div>
-
     <script>
-const events = [
-    {
-        category: "Hackathon",
-        mode: "offline",
-        title: "ISTE Hackathon",
-        desc: "36 Hour Hackathon",
-        date: "11/1/2025",
-        location: "BHOPAL",
-        host: "kaka",
-        tags: ["AI", "Machine Learning", "Career Development"]
-    },
-    {
-        category: "Workshop",
-        mode: "offline",
-        title: "24 hour workshop",
-        desc: "aim to build focus",
-        date: "11/1/2025",
-        location: "Bhopal",
-        host: "kaka",
-        tags: ["AI", "Cybersecurity", "UI/UX Design"]
-    },
-    {
-        category: "Workshop",
-        mode: "hybrid",
-        title: "AI & Machine Learning Summit 2025",
-        desc: "Join industry leaders...",
-        date: "11/6/2025",
-        location: "San Francisco",
-        host: "Bob Smith",
-        tags: ["Artificial Intelligence", "Machine Learning", "Deep Learning"]
-    },
-    {
-        category: "Workshop",
-        mode: "hybrid",
-        title: "AI & Machine Learning Summit 2025",
-        desc: "Join industry leaders...",
-        date: "11/6/2025",
-        location: "San Francisco",
-        host: "Bob Smith",
-        tags: ["Artificial Intelligence", "Machine Learning", "Deep Learning"]
+   
+    
+    let savedPreferences = [];
+try {
+    const raw = document.getElementById("savedPreferences").value;
+    savedPreferences = raw ? JSON.parse(raw) : [];
+} catch {
+    savedPreferences = [];
+}
+
+    console.log("Loaded from MongoDB:", savedPreferences);
+
+    
+    let skillsArr = [...savedPreferences];
+
+    
+    const skillElements = document.querySelectorAll(".skills");
+
+    skillElements.forEach(skill => {
+        const value = skill.textContent.trim();
+
+ 
+        if (savedPreferences.includes(value)) {
+            skill.classList.add("selected");
+        }
+
+        
+        skill.addEventListener("click", () => {
+            skill.classList.toggle("selected");
+
+            if (skill.classList.contains("selected")) {
+                if (!skillsArr.includes(value)) {
+                    skillsArr.push(value);
+                }
+            } else {
+                skillsArr = skillsArr.filter(s => s !== value);
+            }
+
+            console.log("Updated skills:", skillsArr);
+        });
+    });
+
+   
+    function savePreferences() {
+        fetch("/user/set-preferences", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ interests: skillsArr })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log("Saved:", data);
+            window.location.href = "/foryou";
+        })
+        .catch(err => console.error(err));
     }
-];
+</script>
 
-function renderEvents(list) {
-    const container = document.getElementById("eventsContainer");
-    container.innerHTML = "";
-
-    list.forEach(e => {
-        container.innerHTML += `
-            <div class="event-card">
-                <span class="badge">${e.category}</span>
-                <span class="mode">${e.mode}</span>
-
-                <h3>${e.title}</h3>
-                <p>${e.desc}</p>
-
-                <div class="icons">
-                    📅 ${e.date}<br>
-                    📍 ${e.location}<br>
-                    🙍 ${e.host}
-                </div>
-
-                <div class="tags">
-                    ${e.tags.map(t => `<span class="tag">#${t}</span>`).join("")}
-                </div>
-
-                <button class="rsvp">RSVP Now</button>
-            </div>
-        `;
-    });
-}
-
-function clearFilters() {
-    document.getElementById("categoryFilter").selectedIndex = 0;
-    document.getElementById("modeFilter").selectedIndex = 0;
-    renderEvents(events);
-}
-
-document.getElementById("categoryFilter").onchange =
-document.getElementById("modeFilter").onchange = function () {
-    const cat = categoryFilter.value;
-    const mode = modeFilter.value;
-
-    const filtered = events.filter(e => 
-        (cat === "All Categories" || e.category === cat) &&
-        (mode === "All Modes" || e.mode === mode)
-    );
-
-    renderEvents(filtered);
-};
-
-renderEvents(events);
-
-
-function loadCards() {
-    const container = document.getElementById("cardContainer");
-
-    events.forEach(ev => {
-        const card = document.createElement("div");
-        card.classList.add("event-card");
-
-        card.innerHTML = `
-            <div class="card-banner"></div>
-
-            <img class="card-logo" src="${ev.logo}" alt="Logo">
-
-            <div class="card-body">
-
-                <div class="card-tags">
-                    ${ev.tags.map(t => `<span class="tag">${t}</span>`).join("")}
-                </div>
-
-                <h3 class="card-title">${ev.title}</h3>
-
-                <p class="card-subtitle">${ev.institute}</p>
-
-                <div class="card-footer">
-                    <p><i class="fa-solid fa-users"></i> ${ev.applied} Applied</p>
-                    <p><i class="fa-regular fa-clock"></i> ${ev.daysLeft} days left</p>
-                </div>
-
-            </div>
-        `;
-
-        container.appendChild(card);
-    });
-}
-
-loadCards();
-
-    </script>
 </body>
 </html>

@@ -498,7 +498,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
      
         formData.delete("orgName");
-        formData.delete("workshopTitle");
+        formData.delete("seminarTitle");
         formData.delete("url");
         formData.delete("opp-description");
         formData.delete("venue");
@@ -514,7 +514,7 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.delete('organiserNumber')
         formData.append("skills", JSON.stringify(skillsArr));
 
-        formData.append("workshopTitle", document.getElementById("opp-title").value);
+        formData.append("seminarTitle", document.getElementById("opp-title").value);
         formData.append("orgName", document.getElementById("org-name").value);
         formData.append("url", document.getElementById("company-url").value);
         formData.append("description", document.getElementById("opp-description").value);
@@ -541,16 +541,16 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append("maxSize", document.getElementById("team-max").value);
 
         
-        fetch("/host/workshop", {
+        fetch("/host/seminar", {
     method: "POST",
     body: formData,
 })
 .then(res => res.json()) 
 .then(data => {
     console.log(data);
-    alert("Workshop Published!");
+    alert("seminar Published!");
 
-    window.location.href = "/host/workshop/completed";
+    window.location.href = "/host/seminar/completed";
 })
 .catch(err => console.error("Error:", err));
     });
@@ -594,7 +594,7 @@ document.addEventListener("DOMContentLoaded", function () {
         </aside>
 
         <main class="main-content">
-            <form action="/host/workshop" method="POST" enctype="multipart/form-data">
+            <form action="/host/seminar" method="POST" enctype="multipart/form-data">
                 
                 <section class="form-section">
                     <div class="logo-upload-group">
@@ -607,8 +607,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
 
                     <div class="form-group" style="padding-top: 10px;">
-                        <label for="opp-title">Workshop Title *</label>
-                        <input type="text" id="opp-title" placeholder="Enter Opportunity Title" name="workshopTitle">
+                        <label for="opp-title">Seminar Title *</label>
+                        <input type="text" id="opp-title" placeholder="Enter Opportunity Title" name="seminarTitle">
                         <p class="field-hint">Max 190 characters</p>
                     </div>
 
@@ -628,9 +628,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 </section>
 
                 <section class="form-section">
-                    <h2>About the Workshop</h2>
+                    <h2>About the Seminar</h2>
                     <div class="form-group">
-                        <label for="opp-description">Workshop Description *</label>
+                        <label for="opp-description">Seminar Description *</label>
                         <div class="rich-text-editor">
                             <div class="toolbar">
                                 <span>Write the description here.</span>
@@ -826,6 +826,6 @@ document.addEventListener("DOMContentLoaded", function () {
         </main>
     </div>
 
-    <script src="script.js"></script>
+    <script></script>
 </body>
 </html>

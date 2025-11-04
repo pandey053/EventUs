@@ -76,29 +76,33 @@
             </div>
 
          
-            <div class="cards">   
+            <div class="cards">  
+                <!-- <% if (workshops.length === 0) { %>
+   <p>No recommended workshops based on your interests.</p>
+<% } %>  -->
 <% workshops.forEach(item => { %>
 
     <div class="event-card">
         <div class="event-banner">
-            <img src="<%= item.workshop.logo %>" class="event-logo" alt="Event Logo">
+            <img src="<%= item.event.logo %>" class="event-logo" alt="Event Logo">
 
             <div class="event-tags">
-                <span class="tag"><%= item.workshop.mode %></span>
-                <span class="tag"><%= item.workshop.participationType %></span>
+                <span class="tag"><%= item.event.mode %></span>
+                <span class="tag"><%= item.event.participationType %></span>
+                <span class="tag"><%= item.type %></span>
             </div>
         </div>
 
         <div class="event-content">
-            <h3 class="event-title"><%= item.workshop.workshopTitle %></h3>
-            <p class="event-org"><%= item.workshop.description %></p>
+            <h3 class="event-title"><%= item.event.workshopTitle || item.event.hackathonTitle %></h3>
+            <p class="event-org"><%= item.event.description %></p>
 
             <div class="event-stats">
                 <div class="stat">
 
-                    <% if (item.workshop.participationType === "Team") { %>
+                    <% if (item.event.participationType === "Team") { %>
                         <i class="fa fa-users"></i> 
-                        <%= item.workshop.minSize %> - <%= item.workshop.maxSize %> Members
+                        <%= item.event.minSize %> - <%= item.event.maxSize %> Members
                     <% } else { %>
                         <i class="fa fa-user"></i> 1 Member
                     <% } %>
@@ -107,14 +111,14 @@
 
                 <div class="stat">
                     <i class="fa-solid fa-clock"></i> 
-                    <%= Math.ceil((new Date(item.workshop.registrationDate) - new Date()) / (1000*60*60*24)) %> days left
+                    <%= Math.ceil((new Date(item.event.registrationDate) - new Date()) / (1000*60*60*24)) %> days left
                 </div>
             </div>
 
             <div class="event-stats" style="padding-top: 10px;">
                 <div class="stat">
                     <i class="fa-solid fa-graduation-cap"></i> 
-                    <%= item.workshop.participationType %>
+                    <%= item.event.participationType %>
                 </div>
             </div>
 

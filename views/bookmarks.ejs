@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmarks</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<style>
+    * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #f3f5f8;
+}
+
+.layout {
+    display: flex;
+}
+
+.sidebar {
+    width: 270px;
+    background: #1f2d3d;
+    color: #fff;
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+.sidebar ul:last-of-type {
+    margin-top: auto; 
+}
+.sidebar .logo {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.sidebar ul li {
+    margin: 16px 0;
+    list-style: none;
+    cursor: pointer;
+    padding: 8px;
+    padding-left: 16px;
+    border-radius: 6px;
+}
+
+.sidebar ul li.active,
+.sidebar ul li:hover {
+    background: #324a5f;
+}
+
+
+.main {
+    flex: 1;
+    padding: 20px 40px;
+    margin-left: 260px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topbar .right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile {
+    width: 34px;
+    height: 34px;
+    background: #4c6ef5;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.page-title {
+    margin: 20px 0 10px;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+select, .clear-btn {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background: white;
+}
+
+.clear-btn {
+    background: #ececec;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.event-card {
+    width: 290px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    padding-bottom: 15px;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+}
+
+.event-banner {
+    
+    height: 110px;
+    position: relative;
+    border-radius: 15px 15px 0 0;
+}
+
+.event-tags {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.tag {
+    background: #f4f4f4;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+.event-logo {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -30px;
+    right: 15px;
+    border: 4px solid white;
+    background: white;
+    object-fit: cover;
+}
+
+.event-content {
+    padding: 40px 15px 10px;
+    position: relative;
+}
+
+.event-title {
+    font-size: 20px;
+    margin: 0;
+    font-weight: 600;
+}
+
+.event-org {
+    font-size: 14px;
+    color: #555;
+    margin-top: 3px;
+    margin-bottom: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.event-stats {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+.stat i {
+    margin-right: 4px;
+}
+
+
+.event-arrow {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    font-size: 18px;
+    color: #888;
+    cursor: pointer;
+}
+
+.cards{
+  display: grid;
+  /* grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); */
+  gap: 20px;
+  width: 100%;
+}
+.bookmark-cards {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); */
+    gap: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.bookmark-card {
+    width: 290px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    padding-bottom: 5px;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.bookmark-card:hover {
+    transform: translateY(-2px);
+}
+
+.bookmark-header {
+    height: 110px;
+    position: relative;
+    background: linear-gradient(135deg, #1f2d3d 0%, #324a5f 100%);
+    border-radius: 15px 15px 0 0;
+}
+
+.bookmark-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #f4f4f4;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #1f2d3d;
+}
+
+.bookmark-badge i {
+    color: #4c6ef5;
+    margin-right: 5px;
+}
+
+.bookmark-badge i {
+    color: #ffd700;
+    margin-right: 5px;
+}
+
+.bookmark-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.bookmark-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.remove-bookmark {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.remove-bookmark:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.bookmark-content {
+    padding: 40px 15px 10px;
+    position: relative;
+}
+
+
+
+.bookmark-logo {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -30px;
+    right: 15px;
+    border: 4px solid white;
+    background: white;
+    object-fit: cover;
+}
+
+.bookmark-title {
+    font-size: 20px;
+    margin: 0;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.bookmark-org {
+    font-size: 14px;
+    color: #555;
+    margin-top: 3px;
+    margin-bottom: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bookmark-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.bookmark-tag {
+    background: #f4f4f4;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-right: 5px;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.bookmark-tag.online {
+    background: #e6fffa;
+    color: #00a693;
+    border: 1px solid #00a693;
+}
+
+.bookmark-tag.offline {
+    background: #fef5e7;
+    color: #d69e2e;
+    border: 1px solid #d69e2e;
+}
+
+.bookmark-tag.hybrid {
+    background: #f0f4ff;
+    color: #4c6ef5;
+    border: 1px solid #4c6ef5;
+}
+
+.bookmark-tag.free {
+    background: #f0fff4;
+    color: #38a169;
+    border: 1px solid #38a169;
+}
+
+.bookmark-tag.paid {
+    background: #fed7d7;
+    color: #e53e3e;
+    border: 1px solid #e53e3e;
+}
+
+.bookmark-stats {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.bookmark-stat {
+    display: flex;
+    align-items: center;
+}
+
+.bookmark-stat i {
+    margin-right: 4px;
+}
+
+.bookmark-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.bookmark-saved {
+    font-size: 12px;
+    color: #888;
+}
+
+.bookmark-view {
+    background: #4c6ef5;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.bookmark-view:hover {
+    background: #3b5bdb;
+}
+
+.bookmark-arrow {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    font-size: 18px;
+    color: #888;
+    cursor: pointer;
+}
+
+
+.bookmark-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #718096;
+}
+
+.bookmark-empty i {
+    font-size: 48px;
+    color: #cbd5e0;
+    margin-bottom: 20px;
+}
+
+.bookmark-empty h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #4a5568;
+}
+
+.bookmark-empty p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+@media (max-width: 768px) {
+    .bookmark-cards {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .bookmark-card {
+        min-height: auto;
+    }
+    
+    .bookmark-stats {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .bookmark-footer {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+    
+    .bookmark-view {
+        width: 100%;
+        text-align: center;
+    }
+}
+</style>
+<body>
+    <div class="layout">
+    
+        <aside class="sidebar">
+            <div class="logo">EventUs</div>
+            <ul>
+                <li onclick="window.location.href='/foryou'">For You</li>
+                <li onclick="window.location.href='/explore'">Explore Organizations</li>
+                <!-- <li>Subscriptions</li> -->
+                <!-- <li>Explore Categories</li> -->
+                
+                <!-- <li>Groups</li> -->
+                <li class="active">Bookmarks</li>
+                <li onclick="window.location.href='/set_preferences'">Set preferences</li>
+            </ul>
+            <ul>
+                
+                <li onclick="window.location.href='/user/logout'">Logout</li>
+            </ul>
+        </aside>
+
+      
+        <main class="main">
+            <header class="topbar" style="opacity: 0;">
+                <div></div>
+                <div class="right">
+                    <span class="bell">🔔</span>
+                    <div class="profile">D</div>
+                </div>
+            </header>
+
+            <section class="page-title" style="margin-bottom: 5px;">
+                <h2 style="margin-bottom: 10px;">Bookmarked Events</h2>
+                <p>Your saved events and favorites</p>
+            </section>
+            <br>
+            
+            <div class="bookmark-cards">
+                <div class="bookmark-cards">
+
+    <% bookmarks.forEach(event => { %>
+
+        <div class="bookmark-card">
+
+            <div class="bookmark-header">
+                <img src="<%= event.logo %>" class="bookmark-logo">
+                <div class="bookmark-badge">
+                    <i class="fas fa-bookmark"></i> Bookmarked
+                </div>
+                <div class="bookmark-actions">
+                    <button class="remove-bookmark" onclick="removeBookmark('<%= event._id %>')">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bookmark-content">
+                <h3 class="bookmark-title"><%= event.workshopTitle %></h3>
+                <p class="bookmark-org"><%= event.orgName %></p>
+
+                <div class="bookmark-tags">
+                    <span class="bookmark-tag"><%= event.mode %></span>
+                    <span class="bookmark-tag"><%= event.participationType %></span>
+                </div>
+
+                <!-- <div class="bookmark-stats">
+                    <div class="bookmark-stat">
+                        <i class="fa fa-calendar"></i>
+                        <%= new Date(event.date).toDateString() %>
+                    </div>
+                    <div class="bookmark-stat">
+                        <i class="fa fa-clock-o"></i>
+                        <%= Math.ceil((new Date(event.date) - new Date()) / (1000 * 60 * 60 * 24)) %>
+                        days left
+                    </div>
+                </div> -->
+
+                <button class="bookmark-view"
+                    onclick="window.location.href='/workshop/<%= event._id %>'">
+                    Visit Event
+                </button>
+            </div>
+
+        </div>
+
+    <% }) %>
+
+</div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.bookmark-arrow').forEach(el => el.remove());
+    
+    const cards = document.querySelectorAll('.bookmark-card');
+    cards.forEach(card => {
+        const content = card.querySelector('.bookmark-content');
+        if (!content) return;
+        
+        const title = content.querySelector('.bookmark-title');
+        if (title) {
+            title.style.cssText = 'white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 5px;';
+            title.setAttribute('title', title.textContent);
+        }
+        
+        content.style.cssText = 'position: relative; height: 220px; display: flex; flex-direction: column;';
+        
+        const statsDiv = content.querySelector('.bookmark-stats');
+        if (statsDiv) {
+            statsDiv.style.cssText = 'display: flex; justify-content: space-between; position: absolute; bottom: 45px; left: 15px; right: 15px;';
+            statsDiv.querySelectorAll('i').forEach(icon => {
+                if (icon.classList.contains('fa-clock-o')) icon.className = 'fas fa-clock';
+            });
+            
+            const bottomRow = document.createElement('div');
+            bottomRow.style.cssText = 'display: flex; justify-content: space-between; align-items: center; position: absolute; bottom: 10px; left: 15px; right: 15px;';
+            bottomRow.innerHTML = `
+                <span style="color: #666; font-size: 12px;">Bookmarked 3 days ago</span>
+                <button style="background: #007bff; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">Visit Event</button>
+            `;
+            
+            bottomRow.querySelector('button').addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+            
+            content.appendChild(bottomRow);
+        }
+    });
+    
+    const removeButtons = document.querySelectorAll('.remove-bookmark');
+    removeButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const card = this.closest('.bookmark-card');
+            card.style.transition = 'all 0.3s ease';
+            card.style.transform = 'scale(0.8)';
+            card.style.opacity = '0';
+            setTimeout(() => card.remove(), 300);
+        });
+    });
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vise - Manage Your Finances</title>
+    <link rel="stylesheet" href="\stylesheets\login_account_style.css">
+</head>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+*::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.container {
+    display: flex;
+    min-height: 100vh;
+    cursor: default;
+}
+.logo-section {
+    display: none;
+    width: 50%;
+    background-color: #2f486b ;
+    align-items: center;
+    justify-content: center;
+    font-size: 110px;
+    color: white;
+    padding-bottom: 64px;
+}
+
+.logo-section p{
+    letter-spacing: -8px;
+}
+.logo {
+    color: white;
+    font-size: 4rem;
+    font-weight: bold;
+    letter-spacing: -0.05em;
+}
+.logo span {
+    color: white;
+}
+.form-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+    background-color: white;
+}
+.form-container {
+    max-width: 28rem;
+    width: 100%;
+    margin: 0 auto;
+}
+h1 {
+    font-size: 1.875rem;
+    font-weight: 500;
+    color: #111827;
+    margin-bottom: 2rem;
+}
+.input-group {
+    margin-bottom: 1.5rem;
+}
+input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #F5F5F5;
+    color: #333333;
+    border: none;
+    border-radius: 0.375rem;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+}
+input:focus {
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+}
+button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #2f486b;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+button:hover {
+    background-color: #1a1a1a;
+}
+.login-link {
+    text-align: center;
+    margin-top: 2rem;
+    color: #4B5563;
+}
+.login-link a {
+    color: black;
+    text-decoration: none;
+}
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+    .logo-section {
+        display: flex;
+    }
+    
+    .form-section {
+        width: 50%;
+        padding: 3rem;
+   }
+}
+</style>
+<body>
+    <div class="container">
+       
+        <div class="logo-section">
+             <p>EventUs.</p>
+        </div>
+        
+        <div class="form-section">
+            <div class="form-container">
+                <h1>Organisation Signup</h1>
+                
+                <form id="signup-form" method="post" action="/organisation/create_org_account">   
+                    <div class="input-group">
+                        <input type="text" placeholder="Organisation Name" name="orgName" required>
+                    </div>
+                  
+
+                  
+                    <div class="input-group">
+                        <input type="text" placeholder="Location" name="location" required>
+                    </div>       
+                    <div class="input-group">
+                        <input type="email" placeholder="E-mail" name="email" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" placeholder="Password" name="password" required>
+                    </div>
+
+                    <button type="submit">Signup</button>
+                </form>
+                <br>
+                <p class="Signup-link">
+                    Already have an account? <a href="/organisation/login">Login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizer Panel</title>
+    <link rel="stylesheet" href="\stylesheets\workshop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    
+    <aside class="sidebar">
+        <div class="logo">EventUs.</div>
+
+        <ul class="menu">
+             <li class="liinactive" onclick="window.location.href = '/organiser'"><span><i class="fa-regular fa-chart-bar"></i></span> Dashboard</li>
+            <li class="liinactive" onclick="window.location.href = '/workshop'"><span><i class="fa-solid fa-briefcase"></i></span> Workshops</li>
+            <li class="liactive" onclick="window.location.href = '/seminar'"><span><i class="fa-regular fa-users"></i></span> Seminars</li>
+            <li class="liinactive" onclick="window.location.href = '/hackathon'"><span><i class="fa-regular fa-lightbulb" ></i></span> Hackathons</li>
+            <li class="liinactive" onclick="window.location.href = '/networking'"><span><i class="fa-regular fa-handshake"></i></span> Networking Events</li>
+            
+        </ul>
+
+        <!-- <div class="bottom-links">
+            <div class="item"><i class="fa fa-download"></i> My Downloads</div>
+            <div class="item"><i class="fa fa-gear"></i> Settings</div>
+        </div> -->
+    </aside>
+
+   
+    <main class="main">
+    
+        <header class="top-nav">
+            <div class="title">Organizer Panel</div>
+
+            <div class="right-items">
+                <!-- <button class="upgrade-btn">Upgrade</button> -->
+                <!-- <i class="fa fa-bell"></i> -->
+                <!-- <div class="profile"><img src="https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/user-avatar/png/8.png?d=50x50" alt=""></div> -->
+            </div>
+        </header>
+
+        <section class="hero">
+            <section class="welcome">
+                <div>
+                    <h2>My Seminars</h2>
+                </div>
+                <div>
+                    <button onclick="window.location.href='/host/seminar'" class="dropdown-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        Host Seminar
+                    </button>
+                   
+                </div>
+                
+            </section>
+          
+        </section>
+       
+        
+
+      
+        
+    </main>
+    <script>
+    const btn = document.querySelector(".dropdown-btn");
+    const menu = document.getElementById("dropdown");
+
+    btn.addEventListener("click", () => {
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    });
+
+
+    document.addEventListener("click", function(event) {
+        if (!btn.contains(event.target) && !menu.contains(event.target)) {
+            menu.style.display = "none";
+        }
+    });
+</script>
+
+</body>
+</html>

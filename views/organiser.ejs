@@ -20,11 +20,11 @@
         <div class="logo">EventUs</div>
 
         <ul class="menu">
-            <li class="liactive"><span><i class="fa-regular fa-chart-bar"></i></span> Dashboard</li>
-            <li class="liinactive"><span><i class="fa-solid fa-briefcase"></i></span> Workshops</li>
-            <li class="liinactive"><span><i class="fa-regular fa-users"></i></span> Seminars</li>
-            <li class="liinactive"><span><i class="fa-regular fa-lightbulb"></i></span> Hackathons</li>
-            <li class="liinactive"><span><i class="fa-regular fa-handshake"></i></span> Networking Events</li>
+             <li class="liactive" onclick="window.location.href = '/organiser'"><span><i class="fa-regular fa-chart-bar"></i></span> Dashboard</li>
+            <li class="liinactive" onclick="window.location.href = '/workshop'"><span><i class="fa-solid fa-briefcase"></i></span> Workshops</li>
+            <li class="liinactive" onclick="window.location.href = '/seminar'"><span><i class="fa-regular fa-users"></i></span> Seminars</li>
+            <li class="liinactive" onclick="window.location.href = '/hackathon'"><span><i class="fa-regular fa-lightbulb" ></i></span> Hackathons</li>
+            <li class="liinactive" onclick="window.location.href = '/networking'"><span><i class="fa-regular fa-handshake"></i></span> Networking Events</li>
             
         </ul>
 
@@ -46,7 +46,7 @@
 
         <section class="hero">
             <section class="welcome">
-                <h2>Welcome back, Shivansh Srivastava</h2>
+                <h2>Welcome back!</h2>
                 <p class="sub">Overall performance</p>
             </section>
             <section class="cards">
@@ -62,16 +62,16 @@
                 <div class="card">
                     <section class="subcard">
                         <div class="subcard1">
-                            <div class="num">0</div>
-                            <div class="label">Total Candidates</div>
+                            <div class="num" id="numwork">0</div>
+                            <div class="label">Active Workshops</div>
                         </div>
                         <div class="subcard2">
                             <span><i class="fa-regular fa-user"></i></span>
                         </div>
                     </section>
                     <section class="subcard22">
-                        <span><p>Total</p></span>
-                        <span>Registrations</span>
+                        <span><p id="numtot">Total : </p></span>
+                        <!-- <span id="numreg">Registrations : </span> -->
                     </section>
                     
                 </div>
@@ -81,7 +81,7 @@
                     <section class="subcard">
                         <div class="subcard1">
                             <div class="num">0</div>
-                            <div class="label">Total Candidates</div>
+                            <div class="label">Active Seminars</div>
                         </div>
                         <div class="subcard2">
                             <span><i class="fa-regular fa-user"></i></span>
@@ -97,7 +97,7 @@
                     <section class="subcard">
                         <div class="subcard1">
                             <div class="num">0</div>
-                            <div class="label">Total Candidates</div>
+                            <div class="label">Active Hackathons</div>
                         </div>
                         <div class="subcard2">
                             <span><i class="fa-regular fa-user"></i></span>
@@ -114,7 +114,7 @@
                     <section class="subcard">
                         <div class="subcard1">
                             <div class="num">0</div>
-                            <div class="label">Total Candidates</div>
+                            <div class="label">Active Networking Events</div>
                         </div>
                         <div class="subcard2">
                             <span><i class="fa-regular fa-user"></i></span>
@@ -130,7 +130,7 @@
             
         </section>
             <section class="lower">
-            <div class="left-placeholder">
+            <!-- <div class="left-placeholder">
                 <img src="https://i.imgur.com/eY3cIhE.png" alt="placeholder">
                 <p>No data available</p>
                 <img src="https://i.imgur.com/eY3cIhE.png" alt="placeholder">
@@ -144,7 +144,7 @@
                 <img src="https://i.imgur.com/eY3cIhE.png" alt="placeholder">
                 <p>No data available</p>
 
-            </div>
+            </div> -->
 
             <div class="alerts">
                 <div class="tabs">
@@ -167,7 +167,24 @@
         </section>
         </section>
        
-        
+        <script>
+            fetch("/api/host/workshops")
+            .then(res => res.json())
+            .then(data => {
+                if (!data || !data.workshops) {
+                    console.error("No workshops returned:", data);
+                    return;
+                }
+
+                const count = data.workshops.length;
+                document.getElementById("numwork").textContent = count;
+                document.getElementById("numtot").innerHTML = `Total : ${data.workshops.length}`
+                document.getElementById('numreg').innerHTML = `Registrations : ${data.workshops}`
+            })
+            .catch(err => console.error("Fetch error:", err));
+
+
+        </script>
 
       
         
