@@ -6,8 +6,8 @@ let bcrypt = require('bcrypt')
 let jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
-// const { GoogleGenerativeAI } = require("@google/generative-ai");
-// const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 // console.log("Gemini KEY:", process.env.GEMINI_API_KEY);
 const { calculateUserEventSimilarity } = require("./utils/similarityMatrix");
 const Workshop = require('./models/workshop')

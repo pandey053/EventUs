@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const hackathonSchema = new mongoose.Schema({
     orgName: String,
     hackathonTitle: String,
@@ -21,4 +22,4 @@ const hackathonSchema = new mongoose.Schema({
     stages : String
 });
 
-module.exports = mongoose.model("Hackathon", hackathonSchema);
+module.exports = mongoose.model("hackathon", hackathonSchema);

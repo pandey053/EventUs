@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
+
 const workshopSchema = new mongoose.Schema({
     orgName: String,
+    email : String,
     workshopTitle: String,
     url: String,
     description: String,
@@ -19,7 +21,10 @@ const workshopSchema = new mongoose.Schema({
     organiserName : String,
     organiserDesignation : String,
     organiserEmail : String,
-    organiserNumber : String
+    organiserNumber : String,
+    registeredUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    embedding: { type: [Number], default: [] }
+
 });
 
 module.exports = mongoose.model("Workshop", workshopSchema);

@@ -214,3 +214,7 @@ select, .clear-btn {
   gap: 20px;
   width: 100%;
 }
+.card-link {
+    text-decoration: none;
+    color: inherit;
+}
